@@ -1,22 +1,42 @@
-var nextNumber=[];
-var i;
-var aNumber=0;
-var bNumber=1;
-var input=prompt("Enter a number:");
-
-for (i=1; i<=input; i++)
+var input;
+var nextNumber='';
+$(document).ready(function()
 {
-  if (i<=1)
+  //user Interface
+  $("form#fibo").submit(function(event)
   {
-    nextNumber+=i;
+    input=parseInt($('#input').val());
+    Fibonacci();
+    $('#input').val('');
+    event.preventDefault();
+  });
 
-  }
-  else
+  //business logic
+  function Fibonacci()
   {
-    nextNumber= (aNumber+bNumber);
-    aNumber=bNumber;
-    bNumber=nextNumber;
+    var aNumber=0;
+    var bNumber=1;
+    for (var i=1; i<=input;i++)
+    {
+      if (i<=1)
+      {
+        nextNumber+=i;
+      }
+      else
+      {
+        nextNumber= aNumber+bNumber;
+        aNumber=bNumber;
+        bNumber=nextNumber;
+      }
+      else
+      {
+       if(i!=input)
+       {
+         nextNumber+=',';
+       }
+      }
+    }
+    $('.output').text(nextNumber);
+    $('#result').show();
   }
-
-    alert (nextNumber);
-}
+});
